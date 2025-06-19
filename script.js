@@ -5,7 +5,7 @@ const cssEditor = document.getElementById("cssEditor");
 const jsEditor = document.getElementById("jsEditor");
 const outputFrame = document.getElementById("output");
 
-// ▶️ Run button logic
+// ▶️ Run button
 runBtn.addEventListener("click", () => {
   const html = htmlEditor.value;
   const css = cssEditor.value;
@@ -21,12 +21,11 @@ runBtn.addEventListener("click", () => {
   ${html}
   <script>${js}<\/script>
 </body>
-</html>
-  `;
+</html>`;
   outputFrame.srcdoc = result;
 });
 
-// 💾 Save button logic
+// 💾 Save button
 saveBtn.addEventListener("click", () => {
   const zip = new JSZip();
   zip.file("index.html", htmlEditor.value);
@@ -38,41 +37,36 @@ saveBtn.addEventListener("click", () => {
   });
 });
 
-// 📐 Layout toggle logic
+// 📐 Layout switching
 const layoutToggleMain = document.getElementById("layoutToggleMain");
 const layoutMenu = document.getElementById("layoutMenu");
 const workspace = document.querySelector(".workspace");
 
-// Icon map
 const layoutIcons = {
   left: "⬅️",
   right: "➡️",
   top: "⬆️"
 };
 
-// Switch layout function
 function setLayout(type) {
   workspace.classList.remove("layout-left", "layout-right", "layout-top");
   workspace.classList.add(`layout-${type}`);
   layoutToggleMain.textContent = layoutIcons[type];
   layoutMenu.classList.add("hidden");
 
-  // Reset sizes
   const editorArea = document.querySelector(".editor-area");
+  const output = document.getElementById("output");
+
   editorArea.style.width = "";
   editorArea.style.height = "";
-
-  const output = document.getElementById("output");
   output.style.width = "";
   output.style.height = "";
 }
 
-// Toggle layout menu
 layoutToggleMain.addEventListener("click", () => {
   layoutMenu.classList.toggle("hidden");
 });
 
-// Handle layout button clicks
 layoutMenu.querySelectorAll("button").forEach(btn => {
   btn.addEventListener("click", () => {
     const layout = btn.getAttribute("data-layout");
@@ -80,20 +74,20 @@ layoutMenu.querySelectorAll("button").forEach(btn => {
   });
 });
 
-// Hide layout menu when clicking outside
 document.addEventListener("click", (e) => {
   if (!e.target.closest(".layout-toggle-wrapper")) {
     layoutMenu.classList.add("hidden");
   }
 });
 
-// 🔧 Divider resize logic
+// 🔧 Divider resizing
 const divider = document.getElementById("divider");
 let isDragging = false;
 
-divider.addEventListener("mousedown", () => {
+divider.addEventListener("mousedown", (e) => {
   isDragging = true;
   document.body.style.cursor = getComputedStyle(divider).cursor;
+  e.preventDefault();
 });
 
 window.addEventListener("mouseup", () => {
@@ -108,17 +102,21 @@ window.addEventListener("mousemove", (e) => {
   const editorArea = document.querySelector(".editor-area");
   const output = document.getElementById("output");
 
-  if (workspace.classList.contains("layout-top")) {
-    const totalHeight = workspace.offsetHeight;
-    const offsetY = e.clientY - workspace.getBoundingClientRect().top;
-    const percent = Math.max(20, Math.min(80, (offsetY / totalHeight) * 100));
-    editorArea.style.height = `${percent}%`;
-    output.style.height = `${100 - percent}%`;
+  const layout = [...workspace.classList].find(cls =>
+    cls.startsWith("layout-")
+  );
+
+  if (layout === "layout-top") {
+    const rect = workspace.getBoundingClientRect();
+    const percent = ((e.clientY - rect.top) / rect.height) * 100;
+    const safe = Math.max(10, Math.min(90, percent));
+    editorArea.style.height = `${safe}%`;
+    output.style.height = `${100 - safe}%`;
   } else {
-    const totalWidth = workspace.offsetWidth;
-    const offsetX = e.clientX - workspace.getBoundingClientRect().left;
-    const percent = Math.max(20, Math.min(80, (offsetX / totalWidth) * 100));
-    editorArea.style.width = `${percent}%`;
-    output.style.width = `${100 - percent}%`;
+    const rect = workspace.getBoundingClientRect();
+    const percent = ((e.clientX - rect.left) / rect.width) * 100;
+    const safe = Math.max(10, Math.min(90, percent));
+    editorArea.style.width = `${safe}%`;
+    output.style.width = `${100 - safe}%`;
   }
 });

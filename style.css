@@ -4,13 +4,13 @@ body {
   background-color: #2b2d31;
   color: white;
   font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
 }
 
 #container {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  overflow: hidden;
 }
 
 /* Header */
@@ -54,7 +54,7 @@ header h1 {
   background-color: #4752c4;
 }
 
-/* Layout Toggle Dropdown */
+/* Layout Dropdown */
 .layout-toggle-wrapper {
   position: relative;
 }
@@ -113,10 +113,11 @@ header h1 {
   flex-direction: column;
 }
 
-/* Divider */
+/* Divider Styling */
 #divider {
   background-color: #444;
   z-index: 10;
+  transition: background-color 0.2s;
 }
 
 .workspace.layout-left #divider,
@@ -149,7 +150,6 @@ header h1 {
 /* Editor Group */
 .editor-group {
   display: flex;
-  flex-direction: column;
   flex: 1;
   overflow: hidden;
 }
@@ -164,9 +164,9 @@ header h1 {
   display: flex;
   flex-direction: column;
   padding: 10px;
-  overflow: hidden;
   min-width: 150px;
   min-height: 150px;
+  overflow: hidden;
 }
 
 .editor h3 {
@@ -192,7 +192,7 @@ textarea {
   overflow: auto;
 }
 
-/* Output Frame */
+/* Output Preview */
 #output {
   flex: 1;
   border: none;
@@ -202,4 +202,5 @@ textarea {
   min-width: 150px;
   min-height: 150px;
   overflow: auto;
+  display: block;
 }
