@@ -150,12 +150,20 @@ header h1 {
 /* Editor Group */
 .editor-group {
   display: flex;
+  flex-direction: column;
   flex: 1;
   overflow: hidden;
 }
 
+/* For top layout only: side by side editors */
 .workspace.layout-top .editor-group {
   flex-direction: row;
+}
+
+/* Force column layout in left and right explicitly */
+.workspace.layout-left .editor-group,
+.workspace.layout-right .editor-group {
+  flex-direction: column;
 }
 
 /* Individual Editor */
