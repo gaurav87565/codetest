@@ -50,25 +50,29 @@ const layoutIcons = {
   top: "⬆️"
 };
 
-// Switch layout
+// Switch layout function
 function setLayout(type) {
   workspace.classList.remove("layout-left", "layout-right", "layout-top");
   workspace.classList.add(`layout-${type}`);
   layoutToggleMain.textContent = layoutIcons[type];
   layoutMenu.classList.add("hidden");
 
-  // Reset sizing
+  // Reset sizes
   const editorArea = document.querySelector(".editor-area");
   editorArea.style.width = "";
   editorArea.style.height = "";
+
+  const output = document.getElementById("output");
+  output.style.width = "";
+  output.style.height = "";
 }
 
-// Show/hide popup
+// Toggle layout menu
 layoutToggleMain.addEventListener("click", () => {
   layoutMenu.classList.toggle("hidden");
 });
 
-// Layout button click
+// Handle layout button clicks
 layoutMenu.querySelectorAll("button").forEach(btn => {
   btn.addEventListener("click", () => {
     const layout = btn.getAttribute("data-layout");
@@ -76,18 +80,18 @@ layoutMenu.querySelectorAll("button").forEach(btn => {
   });
 });
 
-// Optional: hide layout popup when clicking outside
+// Hide layout menu when clicking outside
 document.addEventListener("click", (e) => {
   if (!e.target.closest(".layout-toggle-wrapper")) {
     layoutMenu.classList.add("hidden");
   }
 });
 
-// 🔧 Drag divider to resize
+// 🔧 Divider resize logic
 const divider = document.getElementById("divider");
 let isDragging = false;
 
-divider.addEventListener("mousedown", (e) => {
+divider.addEventListener("mousedown", () => {
   isDragging = true;
   document.body.style.cursor = getComputedStyle(divider).cursor;
 });
@@ -105,12 +109,16 @@ window.addEventListener("mousemove", (e) => {
   const output = document.getElementById("output");
 
   if (workspace.classList.contains("layout-top")) {
-    const percent = (e.clientY / window.innerHeight) * 100;
-    editorArea.style.height = `clamp(20%,  ${percent}%, 80%)`;
-    output.style.height = `calc(100% - ${percent}%)`;
+    const totalHeight = workspace.offsetHeight;
+    const offsetY = e.clientY - workspace.getBoundingClientRect().top;
+    const percent = Math.max(20, Math.min(80, (offsetY / totalHeight) * 100));
+    editorArea.style.height = `${percent}%`;
+    output.style.height = `${100 - percent}%`;
   } else {
-    const percent = (e.clientX / window.innerWidth) * 100;
-    editorArea.style.width = `clamp(20%, ${percent}%, 80%)`;
-    output.style.width = `calc(100% - ${percent}%)`;
+    const totalWidth = workspace.offsetWidth;
+    const offsetX = e.clientX - workspace.getBoundingClientRect().left;
+    const percent = Math.max(20, Math.min(80, (offsetX / totalWidth) * 100));
+    editorArea.style.width = `${percent}%`;
+    output.style.width = `${100 - percent}%`;
   }
 });

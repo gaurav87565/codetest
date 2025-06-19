@@ -14,8 +14,8 @@
     <header>
       <h1>Try It Yourself</h1>
       <div class="buttons">
-        <button id="runBtn">▶️ Run</button>
-        <button id="saveBtn">💾 Save</button>
+        <button id="runBtn" title="Run Code">▶️ Run</button>
+        <button id="saveBtn" title="Download as ZIP">💾 Save</button>
 
         <!-- 🎛 Inline Layout Toggle -->
         <div class="layout-toggle-wrapper">
@@ -29,8 +29,9 @@
       </div>
     </header>
 
-    <!-- 🧱 Main Workspace: Editor + Output -->
+    <!-- 🧱 Main Workspace -->
     <div class="workspace layout-left">
+      <!-- 📝 Editor Section -->
       <div class="editor-area">
         <div class="editor-group">
           <div class="editor">
@@ -47,8 +48,11 @@
           </div>
         </div>
       </div>
+
       <!-- 🔧 Divider -->
       <div id="divider"></div>
+
+      <!-- 🌐 Live Output -->
       <iframe id="output" title="Live Output"></iframe>
     </div>
   </div>
