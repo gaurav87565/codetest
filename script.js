@@ -5,6 +5,7 @@ const cssEditor = document.getElementById("cssEditor");
 const jsEditor = document.getElementById("jsEditor");
 const outputFrame = document.getElementById("output");
 
+// ▶️ Run button logic
 runBtn.addEventListener("click", () => {
   const html = htmlEditor.value;
   const css = cssEditor.value;
@@ -25,6 +26,7 @@ runBtn.addEventListener("click", () => {
   outputFrame.srcdoc = result;
 });
 
+// 💾 Save button logic
 saveBtn.addEventListener("click", () => {
   const zip = new JSZip();
 
@@ -37,26 +39,43 @@ saveBtn.addEventListener("click", () => {
   });
 });
 
-// Layout toggle buttons
-const layoutSide = document.getElementById("layoutSide");
-const layoutStack = document.getElementById("layoutStack");
-const layoutEditorOnly = document.getElementById("layoutEditorOnly");
-const editorArea = document.querySelector(".editor-area");
 
-layoutSide.addEventListener("click", () => {
-  editorArea.classList.add("side-by-side");
-  editorArea.classList.remove("stacked", "editor-only");
-  outputFrame.classList.remove("hidden");
+// 📐 Layout toggle logic
+const layoutToggleMain = document.getElementById("layoutToggleMain");
+const layoutMenu = document.getElementById("layoutMenu");
+const workspace = document.querySelector(".workspace");
+
+// Icon map
+const layoutIcons = {
+  left: "⬅️",
+  right: "➡️",
+  top: "⬆️"
+};
+
+// Switch layout function
+function setLayout(type) {
+  workspace.classList.remove("layout-left", "layout-right", "layout-top");
+  workspace.classList.add(`layout-${type}`);
+  layoutToggleMain.textContent = layoutIcons[type];
+  layoutMenu.classList.add("hidden");
+}
+
+// Show/hide popup
+layoutToggleMain.addEventListener("click", () => {
+  layoutMenu.classList.toggle("hidden");
 });
 
-layoutStack.addEventListener("click", () => {
-  editorArea.classList.add("stacked");
-  editorArea.classList.remove("side-by-side", "editor-only");
-  outputFrame.classList.remove("hidden");
+// Layout option click
+layoutMenu.querySelectorAll("button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const layout = btn.getAttribute("data-layout");
+    setLayout(layout);
+  });
 });
 
-layoutEditorOnly.addEventListener("click", () => {
-  editorArea.classList.add("editor-only");
-  editorArea.classList.remove("side-by-side", "stacked");
-  outputFrame.classList.add("hidden");
+// Optional: hide popup on outside click
+document.addEventListener("click", (e) => {
+  if (!e.target.closest(".layout-toggle-wrapper")) {
+    layoutMenu.classList.add("hidden");
+  }
 });

@@ -76,44 +76,116 @@ textarea {
   background-color: white;
 }
 
-.layout-toggle {
+.layout-toggle-wrapper {
+  position: relative;
   display: flex;
   justify-content: center;
-  padding: 8px;
   background-color: #1e1f22;
-  border-bottom: 1px solid #444;
+  padding: 10px;
 }
 
-.layout-toggle button {
+.layout-main-btn {
   background-color: #5865f2;
   color: white;
   border: none;
-  margin: 0 5px;
-  padding: 8px 14px;
+  padding: 10px 16px;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 18px;
   font-weight: bold;
 }
 
-.layout-toggle button:hover {
+.layout-main-btn:hover {
   background-color: #4752c4;
 }
 
-.editor-area.side-by-side {
-  flex-direction: row;
-  height: 50%;
+.layout-menu {
+  position: absolute;
+  top: 55px;
+  z-index: 100;
+  background-color: #2b2d31;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
-.editor-area.stacked {
-  flex-direction: column;
-  height: 60%;
+.layout-menu button {
+  background-color: #5865f2;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  font-weight: bold;
 }
 
-.editor-area.editor-only {
-  flex-direction: column;
+.layout-menu button:hover {
+  background-color: #4752c4;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Layout styles */
+.workspace {
+  display: flex;
+  flex: 1;
   height: 100%;
 }
 
-#output.hidden {
-  display: none;
+.workspace.layout-left {
+  flex-direction: row;
+}
+
+.workspace.layout-right {
+  flex-direction: row-reverse;
+}
+
+.workspace.layout-top {
+  flex-direction: column;
+}
+
+.editor-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #313338;
+  padding: 10px;
+}
+
+.editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0;
+}
+
+.editor h3 {
+  margin: 0 0 5px 5px;
+}
+
+textarea {
+  flex: 1;
+  background-color: #1e1f22;
+  color: white;
+  border: none;
+  font-family: monospace;
+  font-size: 14px;
+  padding: 10px;
+  resize: none;
+  border-radius: 6px;
+  outline: none;
+}
+
+#output {
+  flex: 1;
+  border: none;
+  background: white;
+  margin: 10px;
 }

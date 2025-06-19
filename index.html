@@ -1,47 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Try It Yourself - Discord Style</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-</head>
-<body>
-  <div id="container">
-    <header>
-      <h1>Try It Yourself</h1>
-      <div class="buttons">
-        <button id="runBtn">▶️ Run</button>
-        <button id="saveBtn">💾 Save</button>
-      </div>
-    </header>
-
-    <!-- 💡 Layout toggle section like CodePen -->
-    <div class="layout-toggle">
-      <button id="layoutSide" title="Side by Side 🖥️">🖥️</button>
-      <button id="layoutStack" title="Top & Bottom 📱">📱</button>
-      <button id="layoutEditorOnly" title="Editor Only ✍️">✍️</button>
-    </div>
-
-    <div class="editor-area side-by-side"> <!-- Default layout -->
-      <div class="editor">
-        <h3>HTML</h3>
-        <textarea id="htmlEditor">&lt;h1&gt;Hello, World!&lt;/h1&gt;</textarea>
-      </div>
-      <div class="editor">
-        <h3>CSS</h3>
-        <textarea id="cssEditor">body { background: black; color: white; }</textarea>
-      </div>
-      <div class="editor">
-        <h3>JS</h3>
-        <textarea id="jsEditor">console.log('Hello from JS');</textarea>
-      </div>
-    </div>
-
-    <iframe id="output"></iframe>
+<!-- 💡 Single Layout Toggle Button with Popup -->
+<div class="layout-toggle-wrapper">
+  <button id="layoutToggleMain" class="layout-main-btn" title="Change Layout">⬅️</button>
+  <div id="layoutMenu" class="layout-menu hidden">
+    <button data-layout="left">⬅️ Editor Left</button>
+    <button data-layout="right">➡️ Editor Right</button>
+    <button data-layout="top">⬆️ Editor Top</button>
   </div>
+</div>
 
-  <script src="script.js"></script>
-</body>
-</html>
+<!-- 🧱 New workspace layout container -->
+<div class="workspace layout-left"> <!-- Default layout -->
+  <div class="editor-area">
+    <div class="editor">
+      <h3>HTML</h3>
+      <textarea id="htmlEditor">&lt;h1&gt;Hello, World!&lt;/h1&gt;</textarea>
+    </div>
+    <div class="editor">
+      <h3>CSS</h3>
+      <textarea id="cssEditor">body { background: black; color: white; }</textarea>
+    </div>
+    <div class="editor">
+      <h3>JS</h3>
+      <textarea id="jsEditor">console.log('Hello from JS');</textarea>
+    </div>
+  </div>
+  <iframe id="output"></iframe>
+</div>
