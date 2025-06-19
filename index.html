@@ -1,28 +1,54 @@
-<!-- 💡 Single Layout Toggle Button with Popup -->
-<div class="layout-toggle-wrapper">
-  <button id="layoutToggleMain" class="layout-main-btn" title="Change Layout">⬅️</button>
-  <div id="layoutMenu" class="layout-menu hidden">
-    <button data-layout="left">⬅️ Editor Left</button>
-    <button data-layout="right">➡️ Editor Right</button>
-    <button data-layout="top">⬆️ Editor Top</button>
-  </div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Try It Yourself - Discord Style</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+  <div id="container">
+    <!-- 🧭 Header -->
+    <header>
+      <h1>Try It Yourself</h1>
+      <div class="buttons">
+        <button id="runBtn">▶️ Run</button>
+        <button id="saveBtn">💾 Save</button>
+      </div>
+    </header>
 
-<!-- 🧱 New workspace layout container -->
-<div class="workspace layout-left"> <!-- Default layout -->
-  <div class="editor-area">
-    <div class="editor">
-      <h3>HTML</h3>
-      <textarea id="htmlEditor">&lt;h1&gt;Hello, World!&lt;/h1&gt;</textarea>
+    <!-- 🎛 Layout Toggle Dropdown -->
+    <div class="layout-toggle-wrapper">
+      <button id="layoutToggleMain" class="layout-main-btn" title="Change Layout">⬅️</button>
+      <div id="layoutMenu" class="layout-menu hidden">
+        <button data-layout="left">⬅️ Editor Left</button>
+        <button data-layout="right">➡️ Editor Right</button>
+        <button data-layout="top">⬆️ Editor Top</button>
+      </div>
     </div>
-    <div class="editor">
-      <h3>CSS</h3>
-      <textarea id="cssEditor">body { background: black; color: white; }</textarea>
-    </div>
-    <div class="editor">
-      <h3>JS</h3>
-      <textarea id="jsEditor">console.log('Hello from JS');</textarea>
+
+    <!-- 🧱 Main Workspace: Editor + Output -->
+    <div class="workspace layout-left"> <!-- default layout is editor-left -->
+      <div class="editor-area">
+        <div class="editor">
+          <h3>HTML</h3>
+          <textarea id="htmlEditor">&lt;h1&gt;Hello, World!&lt;/h1&gt;</textarea>
+        </div>
+        <div class="editor">
+          <h3>CSS</h3>
+          <textarea id="cssEditor">body { background: black; color: white; }</textarea>
+        </div>
+        <div class="editor">
+          <h3>JS</h3>
+          <textarea id="jsEditor">console.log('Hello from JS');</textarea>
+        </div>
+      </div>
+      <iframe id="output" title="Live Output"></iframe>
     </div>
   </div>
-  <iframe id="output"></iframe>
-</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
