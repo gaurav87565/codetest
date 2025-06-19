@@ -19,23 +19,24 @@ function downloadCode() {
   });
 }
 
-// Resizable logic
+// ✅ Improved resizable divider logic
 const divider = document.getElementById("divider");
 const editor = document.getElementById("editor");
-let isResizing = false;
 
 divider.addEventListener("mousedown", () => {
-  isResizing = true;
   document.body.style.cursor = "ew-resize";
-});
 
-window.addEventListener("mousemove", (e) => {
-  if (!isResizing) return;
-  const percent = (e.clientX / window.innerWidth) * 100;
-  editor.style.flex = "0 0 " + percent + "%";
-});
+  const onMouseMove = (e) => {
+    const percent = (e.clientX / window.innerWidth) * 100;
+    editor.style.flex = `0 0 ${percent}%`;
+  };
 
-window.addEventListener("mouseup", () => {
-  isResizing = false;
-  document.body.style.cursor = "default";
+  const onMouseUp = () => {
+    document.body.style.cursor = "default";
+    window.removeEventListener("mousemove", onMouseMove);
+    window.removeEventListener("mouseup", onMouseUp);
+  };
+
+  window.addEventListener("mousemove", onMouseMove);
+  window.addEventListener("mouseup", onMouseUp);
 });

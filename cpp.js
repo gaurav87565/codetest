@@ -1,21 +1,23 @@
 const divider = document.getElementById("divider");
 const editor = document.getElementById("editor");
-let isResizing = false;
 
+// Improved resizable logic
 divider.addEventListener("mousedown", () => {
-  isResizing = true;
   document.body.style.cursor = "ew-resize";
-});
 
-window.addEventListener("mousemove", (e) => {
-  if (!isResizing) return;
-  const percent = (e.clientX / window.innerWidth) * 100;
-  editor.style.flex = "0 0 " + percent + "%";
-});
+  const onMouseMove = (e) => {
+    const percent = (e.clientX / window.innerWidth) * 100;
+    editor.style.flex = `0 0 ${percent}%`;
+  };
 
-window.addEventListener("mouseup", () => {
-  isResizing = false;
-  document.body.style.cursor = "default";
+  const onMouseUp = () => {
+    document.body.style.cursor = "default";
+    window.removeEventListener("mousemove", onMouseMove);
+    window.removeEventListener("mouseup", onMouseUp);
+  };
+
+  window.addEventListener("mousemove", onMouseMove);
+  window.addEventListener("mouseup", onMouseUp);
 });
 
 // Run C++ using Judge0 API
@@ -30,7 +32,7 @@ async function runCppCode() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "x-rapidapi-key": "6dda188f34msh26c705ff97cf404p18b8d8jsn14ddecfa0823",  // Replace with your key
+        "x-rapidapi-key": "6dda188f34msh26c705ff97cf404p18b8d8jsn14ddecfa0823",
         "x-rapidapi-host": "judge0-ce.p.rapidapi.com"
       },
       body: JSON.stringify({
