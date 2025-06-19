@@ -113,25 +113,6 @@ header h1 {
   flex-direction: column;
 }
 
-/* Divider Styling */
-#divider {
-  background-color: #444;
-  z-index: 10;
-  transition: background-color 0.2s;
-}
-
-.workspace.layout-left #divider,
-.workspace.layout-right #divider {
-  width: 6px;
-  cursor: col-resize;
-}
-
-.workspace.layout-top #divider {
-  height: 6px;
-  width: 100%;
-  cursor: row-resize;
-}
-
 /* Editor Area */
 .editor-area {
   flex: 1;
