@@ -79,3 +79,31 @@ document.addEventListener("click", (e) => {
     layoutMenu.classList.add("hidden");
   }
 });
+
+// Drag Divider Logic
+const divider = document.getElementById("divider");
+let isDragging = false;
+
+divider.addEventListener("mousedown", (e) => {
+  isDragging = true;
+  document.body.style.cursor = divider.style.cursor;
+});
+
+window.addEventListener("mouseup", () => {
+  isDragging = false;
+  document.body.style.cursor = "";
+});
+
+window.addEventListener("mousemove", (e) => {
+  if (!isDragging) return;
+  const workspace = document.querySelector(".workspace");
+  const editorArea = document.querySelector(".editor-area");
+
+  if (workspace.classList.contains("layout-top")) {
+    const percent = (e.clientY / window.innerHeight) * 100;
+    editorArea.style.height = `${percent}%`;
+  } else {
+    const percent = (e.clientX / window.innerWidth) * 100;
+    editorArea.style.width = `${percent}%`;
+  }
+});

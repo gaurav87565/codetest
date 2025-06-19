@@ -19,15 +19,24 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #444;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 header h1 {
   margin: 0;
+  font-size: 20px;
 }
 
-.buttons button {
-  margin-left: 10px;
+.buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.buttons button,
+.layout-main-btn {
   background-color: #5865f2;
   color: white;
   border: none;
@@ -35,40 +44,23 @@ header h1 {
   border-radius: 6px;
   cursor: pointer;
   font-weight: bold;
+  font-size: 14px;
 }
 
-.buttons button:hover {
-  background-color: #4752c4;
-}
-
-/* Layout Toggle Button */
-.layout-toggle-wrapper {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  background-color: #1e1f22;
-  padding: 10px;
-}
-
-.layout-main-btn {
-  background-color: #5865f2;
-  color: white;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: bold;
-}
-
+.buttons button:hover,
 .layout-main-btn:hover {
   background-color: #4752c4;
 }
 
-/* Layout Dropdown */
+/* Layout Toggle */
+.layout-toggle-wrapper {
+  position: relative;
+}
+
 .layout-menu {
   position: absolute;
-  top: 55px;
+  top: 40px;
+  right: 0;
   z-index: 100;
   background-color: #2b2d31;
   border: 1px solid #444;
@@ -103,7 +95,7 @@ header h1 {
 .workspace {
   display: flex;
   flex: 1;
-  height: 100%;
+  height: calc(100vh - 70px);
   overflow: hidden;
 }
 
@@ -119,21 +111,51 @@ header h1 {
   flex-direction: column;
 }
 
+/* Divider Styling */
+#divider {
+  width: 6px;
+  background-color: #444;
+  cursor: col-resize;
+}
+
+.workspace.layout-top #divider {
+  height: 6px;
+  width: 100%;
+  cursor: row-resize;
+}
+
 /* Editor Area */
 .editor-area {
   flex: 1;
+  background: #313338;
+  overflow: auto;
   display: flex;
   flex-direction: column;
-  background: #313338;
-  padding: 10px;
-  overflow: auto;
+  min-width: 200px;
 }
 
+.workspace.layout-top .editor-area {
+  flex-direction: row;
+}
+
+/* Editor Group (used to arrange editors side-by-side in top layout) */
+.editor-group {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.workspace.layout-top .editor-group {
+  flex-direction: row;
+}
+
+/* Individual Editor Panel */
 .editor {
   flex: 1;
   display: flex;
   flex-direction: column;
-  margin: 5px 0;
+  padding: 10px;
+  min-width: 200px;
 }
 
 .editor h3 {
@@ -153,6 +175,7 @@ textarea {
   resize: none;
   border-radius: 6px;
   outline: none;
+  min-height: 100px;
 }
 
 /* Output Preview */
@@ -160,5 +183,7 @@ textarea {
   flex: 1;
   border: none;
   background: white;
-  margin: 10px;
+  min-width: 200px;
+  min-height: 100px;
+  margin: 0;
 }
