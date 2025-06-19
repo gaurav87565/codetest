@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>C++ Online Compiler - Discord Theme</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <script src="libs/jszip.min.js"></script>
+  <script src="libs/FileSaver.min.js"></script>
+</head>
+<body>
+
+  <h1>🧠 C++ Online Compiler - Discord Theme</h1>
+
+  <div class="main-container" id="main">
+    <div class="editor-container" id="editor">
+      <label for="cppCode">C++ Code</label>
+      <textarea id="cppCode">#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    cout &lt;&lt; "Hello, Discord!" &lt;&lt; endl;
+    return 0;
+}</textarea>
+
+      <div class="buttons">
+        <button onclick="runCppCode()">▶ Run</button>
+        <button onclick="downloadCpp()">💾 Save Code</button>
+      </div>
+    </div>
+
+    <div class="divider" id="divider"></div>
+
+    <div class="output-container">
+      <iframe id="outputFrame" title="output"></iframe>
+    </div>
+  </div>
+
+  <script src="cpp.js"></script>
+</body>
+</html>
