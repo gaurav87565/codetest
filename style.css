@@ -1,3 +1,4 @@
+/* General Styles */
 body {
   margin: 0;
   background-color: #2b2d31;
@@ -11,6 +12,7 @@ body {
   height: 100vh;
 }
 
+/* Header */
 header {
   background-color: #1e1f22;
   padding: 10px 20px;
@@ -39,43 +41,7 @@ header h1 {
   background-color: #4752c4;
 }
 
-.editor-area {
-  display: flex;
-  height: 50%;
-}
-
-.editor {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-}
-
-.editor h3 {
-  margin: 0 0 5px 0;
-  padding-left: 5px;
-}
-
-textarea {
-  flex: 1;
-  background-color: #313338;
-  color: white;
-  border: none;
-  resize: none;
-  font-family: monospace;
-  font-size: 14px;
-  padding: 10px;
-  border-radius: 8px;
-  outline: none;
-}
-
-#output {
-  flex: 1;
-  border: none;
-  margin: 10px;
-  background-color: white;
-}
-
+/* Layout Toggle Button */
 .layout-toggle-wrapper {
   position: relative;
   display: flex;
@@ -99,6 +65,7 @@ textarea {
   background-color: #4752c4;
 }
 
+/* Layout Dropdown */
 .layout-menu {
   position: absolute;
   top: 55px;
@@ -132,11 +99,12 @@ textarea {
   display: none;
 }
 
-/* Layout styles */
+/* Workspace & Layout Modes */
 .workspace {
   display: flex;
   flex: 1;
   height: 100%;
+  overflow: hidden;
 }
 
 .workspace.layout-left {
@@ -151,12 +119,14 @@ textarea {
   flex-direction: column;
 }
 
+/* Editor Area */
 .editor-area {
   flex: 1;
   display: flex;
   flex-direction: column;
   background: #313338;
   padding: 10px;
+  overflow: auto;
 }
 
 .editor {
@@ -168,6 +138,8 @@ textarea {
 
 .editor h3 {
   margin: 0 0 5px 5px;
+  font-size: 14px;
+  font-weight: normal;
 }
 
 textarea {
@@ -183,6 +155,7 @@ textarea {
   outline: none;
 }
 
+/* Output Preview */
 #output {
   flex: 1;
   border: none;
