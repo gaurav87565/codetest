@@ -14,11 +14,11 @@ runBtn.addEventListener("click", () => {
 <!DOCTYPE html>
 <html>
 <head>
-<style>${css}</style>
+  <style>${css}</style>
 </head>
 <body>
-${html}
-<script>${js}</script>
+  ${html}
+  <script>${js}<\/script>
 </body>
 </html>
   `;
@@ -35,4 +35,28 @@ saveBtn.addEventListener("click", () => {
   zip.generateAsync({ type: "blob" }).then(content => {
     saveAs(content, "tryit-yourself.zip");
   });
+});
+
+// Layout toggle buttons
+const layoutSide = document.getElementById("layoutSide");
+const layoutStack = document.getElementById("layoutStack");
+const layoutEditorOnly = document.getElementById("layoutEditorOnly");
+const editorArea = document.querySelector(".editor-area");
+
+layoutSide.addEventListener("click", () => {
+  editorArea.classList.add("side-by-side");
+  editorArea.classList.remove("stacked", "editor-only");
+  outputFrame.classList.remove("hidden");
+});
+
+layoutStack.addEventListener("click", () => {
+  editorArea.classList.add("stacked");
+  editorArea.classList.remove("side-by-side", "editor-only");
+  outputFrame.classList.remove("hidden");
+});
+
+layoutEditorOnly.addEventListener("click", () => {
+  editorArea.classList.add("editor-only");
+  editorArea.classList.remove("side-by-side", "stacked");
+  outputFrame.classList.add("hidden");
 });

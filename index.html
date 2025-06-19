@@ -16,7 +16,15 @@
         <button id="saveBtn">💾 Save</button>
       </div>
     </header>
-    <div class="editor-area">
+
+    <!-- 💡 Layout toggle section like CodePen -->
+    <div class="layout-toggle">
+      <button id="layoutSide" title="Side by Side 🖥️">🖥️</button>
+      <button id="layoutStack" title="Top & Bottom 📱">📱</button>
+      <button id="layoutEditorOnly" title="Editor Only ✍️">✍️</button>
+    </div>
+
+    <div class="editor-area side-by-side"> <!-- Default layout -->
       <div class="editor">
         <h3>HTML</h3>
         <textarea id="htmlEditor">&lt;h1&gt;Hello, World!&lt;/h1&gt;</textarea>
@@ -30,8 +38,10 @@
         <textarea id="jsEditor">console.log('Hello from JS');</textarea>
       </div>
     </div>
+
     <iframe id="output"></iframe>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

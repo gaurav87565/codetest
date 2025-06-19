@@ -75,3 +75,45 @@ textarea {
   margin: 10px;
   background-color: white;
 }
+
+.layout-toggle {
+  display: flex;
+  justify-content: center;
+  padding: 8px;
+  background-color: #1e1f22;
+  border-bottom: 1px solid #444;
+}
+
+.layout-toggle button {
+  background-color: #5865f2;
+  color: white;
+  border: none;
+  margin: 0 5px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.layout-toggle button:hover {
+  background-color: #4752c4;
+}
+
+.editor-area.side-by-side {
+  flex-direction: row;
+  height: 50%;
+}
+
+.editor-area.stacked {
+  flex-direction: column;
+  height: 60%;
+}
+
+.editor-area.editor-only {
+  flex-direction: column;
+  height: 100%;
+}
+
+#output.hidden {
+  display: none;
+}
